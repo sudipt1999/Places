@@ -29,9 +29,10 @@ const SearchBar = (props) => {
     let autocompleteResults = null;
     let classes = useStyles();
     if(props.autocompleteResult && props.showAutoComplete){
-        autocompleteResults = props.autocompleteResult.map(part=>{
+        autocompleteResults = props.autocompleteResult.map((part,i)=>{
             return(      
                     <MenuItem 
+                        key={i}
                         component="div" 
                         style={{width: "60%", borderLeft: '0.5px solid #fff'}} 
                         onClick={()=>props.autocompleteSelect(part.place_id)}

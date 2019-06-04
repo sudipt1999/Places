@@ -7,8 +7,9 @@ const Cards = (props) => {
     let cards = null;
 
     if(props.autocomplete){
-        cards = props.autocomplete.map(detail=>(
+        cards = props.autocomplete.map((detail,i)=>(
                     <Card 
+                        key={i}
                         name={detail.structured_formatting.main_text}
                         onClickHandler={props.onShowWeatherForLocation}
                     />));

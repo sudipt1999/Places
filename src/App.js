@@ -9,7 +9,7 @@ import Container from "@material-ui/core/Container";
 
 
 import axios from 'axios';
-axios.defaults.headers.post['Content-Type'] ='application/json;charset=utf-8';
+
 
 const hardCodedData = [
     {
@@ -227,7 +227,14 @@ const hardCodedData = [
     }
 ]
   
-
+const apiKey = 'AIzaSyB3RSD0ORwAX2d3IZeush8JtPnFvd4UMDo';
+const sessionTokken= (Math.random()*10);
+const authOptions = {
+    headers: {
+        'Content-Type': 'application/json;charset=UTF-8',
+        "Access-Control-Allow-Origin": "http://localhost:3000",
+    }
+  };
 
 class App extends Component {
   
@@ -242,12 +249,6 @@ class App extends Component {
   }
 
 
-
-  componentWillMount(){
-    console.log(this.state);
- 
-  }
-
   // for handling the input on searchBar
   searchValueHandler = (event) => {
     
@@ -255,7 +256,7 @@ class App extends Component {
     
     if(event.target.value.length > 0){
       // making call to fetch autocomplete data
-      let url = `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${event.target.value}&key=AIzaSyCanxw-LWy1Lz7SJCVDL2tudWaRQXtkw9g&sessiontoken=1234567890`;
+      let url = `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${event.target.value}&key=${apiKey}&sessiontoken=${sessionTokken}`;
       console.log(url);
      
     //   axios.post(url)
@@ -295,12 +296,7 @@ class App extends Component {
     }
   }
 
-  // for handling the autocomplete
-  autocompleteHandler = (data) => {
-
-  }
-
-  // on click autocomplete
+  // on click autocomplete will send requst for final search value
   autocompleteSelect = (id) => {
 
     console.log("CLICKED LI ",id)
@@ -333,15 +329,15 @@ class App extends Component {
   searchButtonClickHandler = () => {
     console.log("clicked");
     //when clicked we need to send request to query complete api google
-    // let url = `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${this.state.searchValue}&key=AIzaSyCNa3V4dD5SYdwa8KGj_JMQjYaR5ca5K8A&sessiontoken=1234567890`;
-    //   console.log(url);
+    let url = `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${this.state.searchValue}&key=${apiKey}&sessiontoken=${sessionTokken}`;
+      console.log(url);
      
-    //   axios.post(url)
-    //   .then(res => {
-    //       console.log(res);
+      axios.post(url)
+      .then(res => {
+          console.log("RESPONSE",res);
              
-    //   })
-    //   .catch(err => console.log("EROR"));
+      })
+      .catch(err => console.log("EROR"));
 
 
       this.setState({
