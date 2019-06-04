@@ -354,6 +354,8 @@ class App extends Component {
         console.log(this.state);
 
         const url = `http://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=77531ae36740ffab832db5c0c158f4d0`
+
+        console.log("WEATHER URL ", url)
         axios.post(url)
       .then(res => {
           console.log(" RRR>>> ",res);
