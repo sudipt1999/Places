@@ -245,7 +245,7 @@ class App extends Component {
 
   componentWillMount(){
     console.log(this.state);
-   
+ 
   }
 
   // for handling the input on searchBar
@@ -258,32 +258,32 @@ class App extends Component {
       let url = `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${event.target.value}&key=AIzaSyCanxw-LWy1Lz7SJCVDL2tudWaRQXtkw9g&sessiontoken=1234567890`;
       console.log(url);
      
-      axios.post(url)
-      .then(res => {
-          console.log(res);
-            if(res.data){
-                this.setState({
-                    autocomplete: res.data.predictions,
-                    showAutoComplete: true,
-                    displayCards: false
-                  })
-            }else{
-                this.setState({
-                    showAutoComplete: true,
-                    displayCards: false,
-                    autocomplete: hardCodedData
-                  })
-            }
+    //   axios.post(url)
+    //   .then(res => {
+    //       console.log(res);
+    //         if(res.data){
+    //             this.setState({
+    //                 autocomplete: res.data.predictions,
+    //                 showAutoComplete: true,
+    //                 displayCards: false
+    //               })
+    //         }else{
+    //             this.setState({
+    //                 showAutoComplete: true,
+    //                 displayCards: false,
+    //                 autocomplete: hardCodedData
+    //               })
+    //         }
               
-      })
-      .catch(err => console.log("ERROR"));
-    }
+    //   })
+    //   .catch(err => console.log("ERROR"));
 
       this.setState({
         searchValue: event.target.value,
-        autocomplete: [],
+        autocomplete: hardCodedData,
         showAutoComplete: true
       })
+    }
   }
 
   // for handling the autocomplete
