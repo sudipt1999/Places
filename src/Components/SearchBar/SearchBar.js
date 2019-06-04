@@ -57,7 +57,7 @@ const SearchBar = (props) => {
                 onChange={props.searchBarHandler}
                 margin="normal"
             />
-                <Button className={classes.searchButton} variant="contained" size="large" color="primary" className="searchInputButton" onClick={props.searchValueButtonClicked}>Search</Button>
+                <Button className={classes.searchButton + " searchInputButton"} variant="contained" size="large" color="primary" onClick={props.searchValueButtonClicked}>Search</Button>
             </Container>
                 {autocompleteResults}    
         </Container>
