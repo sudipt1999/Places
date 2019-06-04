@@ -27,6 +27,13 @@ const useStyles = makeStyles({
     pos: {
       marginBottom: 12,
     },
+    titleText: {
+      color: 'rgb(107, 95, 95)',
+      fontSize: '1.2rem'
+    },
+    whiteColorText:{
+      color: '#fff'
+     }
   });
 
 
@@ -39,11 +46,11 @@ const CardComponent = (props) => {
                     <Card className={classes.card} style={{textAlign: 'left'}}>
                         <CardContent>
                                 <Typography className={classes.title}  gutterBottom>
-                                    <strong style={{color: 'rgb(107, 95, 95)', fontSize: '1.2rem'}} >{props.name}</strong> 
+                                    <strong className={classes.titleText} >{props.name}</strong> 
                                 </Typography>
                         </CardContent>
                             <CardActions>
-                                <Button size="small" style={{color: '#fff'}} onClick={()=>props.onClickHandler(props.name)}>See Weather</Button>
+                                <Button size="small" className={classes.whiteColorText} onClick={()=>props.onClickHandler(props.name)}>See Weather</Button>
                             </CardActions>
                     </Card>
             

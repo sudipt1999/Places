@@ -2,11 +2,6 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Modal from '@material-ui/core/Modal';
-import Button from '@material-ui/core/Button';
-
-function rand() {
-    return Math.round(Math.random() * 10) - 20;
-  }
 
 function getModalStyle() {
     const top = 50;
@@ -27,10 +22,18 @@ function getModalStyle() {
       boxShadow: theme.shadows[5],
       padding: theme.spacing(4),
       outline: 'none',
-      background: `linear-gradient(rgba(0,0,0,0.3),rgba(0, 0, 0,0.3)), url('http://brettdesigninc.com/wp-content/uploads/2015/06/Brett_Design_Wallpaper_Ombre_Sky_blue.jpg')` ,
+      background: `linear-gradient(rgba(0,0,0,0.3),rgba(0, 0, 0,0.3)), url('https://brettdesigninc.com/wp-content/uploads/2015/06/Brett_Design_Wallpaper_Ombre_Sky_blue.jpg')` ,
       backgroundSize:'cover',
       backgroundRepeat: 'no-repeat',
       backgroundPosition: 'center',
+    },
+    weatherElement : {
+        borderBottom: '0.3px solid rgba(255,255,255,0.5)', 
+        padding: '0.4%', 
+        marginTop: '13px'
+    },
+    whiteColorText:{
+        color: '#fff'
     }
   }));
 
@@ -49,27 +52,27 @@ const ModalComponent = (props) => {
 
         modalContent = (
             <div style={modalStyle} className={classes.paper}>
-                        <Typography variant="h6" id="modal-title" style={{color:"#fff"}}>
+                        <Typography variant="h6" id="modal-title" className={classes.whiteColorText}>
                             Weather Report for {props.data.name}
                         </Typography>
-                        <Typography variant="subtitle1" id="simple-modal-description" style={{color:"#fff"}}>
-                            <div style={{borderBottom: '0.3px solid rgba(255,255,255,0.5)', padding: '0.4%', marginTop: '16px'}}>
+                        <Typography variant="subtitle1" id="simple-modal-description">
+                            <div className={classes.weatherElement}>
                                 <strong>Weather :</strong>
                                 {weather.main}
                             </div>
-                            <div style={{borderBottom: '0.3px solid rgba(255,255,255,0.5))', padding: '0.4%',  marginTop: '10px'}}>
+                            <div className={classes.weatherElement}>
                                 <strong>Description :</strong>
                                 {weather.description}
                             </div>
-                            <div style={{borderBottom: '0.3px solid rgba(255,255,255,0.5)', padding: '0.4%' ,  marginTop: '10px'}}>
+                            <div className={classes.weatherElement}>
                                 <strong>Temperature :</strong>
                                 {main.temp}(K)
                             </div>
-                            <div style={{borderBottom: '0.3px solid rgba(255,255,255,0.5)', padding: '0.4%', marginTop: '10px'}}>
+                            <div className={classes.weatherElement}>
                                 <strong>Humidity :</strong>
                                 {main.humidity}
                             </div>
-                            <div style={{borderBottom: '0.3px solid rgba(255,255,255,0.5)', padding: '0.4%', marginTop: '10px'}}>
+                            <div className={classes.weatherElement}>
                                 <strong>Pressure :</strong>
                                 {main.pressure}
                             </div>

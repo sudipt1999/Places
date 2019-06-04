@@ -284,6 +284,14 @@ class App extends Component {
         showAutoComplete: true,
         displayCards: false
       })
+    }//if
+    else{
+        this.setState({
+            searchValue: "",
+            autocomplete: hardCodedData,
+            showAutoComplete: false,
+            displayCards: false
+          })
     }
   }
 
@@ -419,7 +427,9 @@ class App extends Component {
 
 
     return (
-            <Container maxWidth="md" style={{minHeight: '90vh', boxSizing: 'border-box', overflow: 'hidden'}}>
+            <Container 
+                    maxWidth="md" 
+                    style={{minHeight: '90vh', boxSizing: 'border-box', overflow: 'hidden'}}>
                 <SearchBar
                     searchBarHandler={this.searchValueHandler}
                     areCardsDisplay={this.state.displayCards}   

@@ -17,17 +17,26 @@ const useStyles = makeStyles(theme => ({
     },
     searchButton: {
         marginLeft: 12
-    }
+    },
+    whiteColorText:{
+        color: '#fff',
+        display: 'block'
+       }
 }));
 
 
 const SearchBar = (props) => {
     let autocompleteResults = null;
+    let classes = useStyles();
     if(props.autocompleteResult && props.showAutoComplete){
         autocompleteResults = props.autocompleteResult.map(part=>{
             return(      
-                    <MenuItem component="div" style={{width: "60%", borderLeft: '0.5px solid #fff'}} onClick={()=>props.autocompleteSelect(part.place_id)}>
-                        <div style={{display: "block", color: "#fff"}}>
+                    <MenuItem 
+                        component="div" 
+                        style={{width: "60%", borderLeft: '0.5px solid #fff'}} 
+                        onClick={()=>props.autocompleteSelect(part.place_id)}
+                        >
+                        <div className={classes.whiteColorText}>
                             <span key={part.place_id}  style={{ fontWeight: part.highlight ? 500 : 400 }}>
                                 {part.structured_formatting.main_text}
                             </span>
@@ -44,7 +53,7 @@ const SearchBar = (props) => {
     }
 
     console.log("P",props.searchValue);
-    const classes = useStyles();
+  
     return (
         <Container className={classes.searchBarClasses}>
             <Container>
@@ -57,7 +66,15 @@ const SearchBar = (props) => {
                 onChange={props.searchBarHandler}
                 margin="normal"
             />
-                <Button className={classes.searchButton + " searchInputButton"} variant="contained" size="large" color="primary" onClick={props.searchValueButtonClicked}>Search</Button>
+                <Button 
+                    className={classes.searchButton + " searchInputButton"} 
+                    variant="contained" 
+                    size="large" 
+                    color="primary" 
+                    onClick={props.searchValueButtonClicked}
+                    >
+                        Search
+                </Button>
             </Container>
                 {autocompleteResults}    
         </Container>
