@@ -255,7 +255,7 @@ class App extends Component {
     
     if(event.target.value.length > 0){
       // making call to fetch autocomplete data
-      let url = `http://maps.googleapis.com/maps/api/place/autocomplete/json?input=${event.target.value}&key=AIzaSyCanxw-LWy1Lz7SJCVDL2tudWaRQXtkw9g&sessiontoken=1234567890`;
+      let url = `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${event.target.value}&key=AIzaSyCanxw-LWy1Lz7SJCVDL2tudWaRQXtkw9g&sessiontoken=1234567890`;
       console.log(url);
      
       axios.post(url)
