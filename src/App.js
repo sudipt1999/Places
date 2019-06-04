@@ -324,20 +324,23 @@ class App extends Component {
   searchButtonClickHandler = () => {
     console.log("clicked");
     //when clicked we need to send request to query complete api google
-    let url = `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${this.state.searchValue}&key=AIzaSyCNa3V4dD5SYdwa8KGj_JMQjYaR5ca5K8A&sessiontoken=1234567890`;
-      console.log(url);
+    // let url = `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${this.state.searchValue}&key=AIzaSyCNa3V4dD5SYdwa8KGj_JMQjYaR5ca5K8A&sessiontoken=1234567890`;
+    //   console.log(url);
      
-      axios.post(url)
-      .then(res => {
-          console.log(res);
-             this.setState({
-                autocomplete: hardCodedData,
-                displayCards: true,
-                showAutoComplete: false,
-                searchValue: ""
-              })
+    //   axios.post(url)
+    //   .then(res => {
+    //       console.log(res);
+             
+    //   })
+    //   .catch(err => console.log("EROR"));
+
+
+      this.setState({
+        autocomplete: hardCodedData,
+        displayCards: true,
+        showAutoComplete: false,
+        searchValue: ""
       })
-      .catch(err => console.log("EROR"));
 
     }
 
