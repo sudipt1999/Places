@@ -6,9 +6,11 @@ import SearchBar from './Components/SearchBar/SearchBar';
 import Modal from './Components/Modal/Modal';
 import Cards from './Components/Cards/Cards';
 import Container from "@material-ui/core/Container";
+import Loader from './Components/Loader/Loader';
 
 
 import axios from 'axios';
+
 
 
 const hardCodedData = [
@@ -227,7 +229,7 @@ const hardCodedData = [
     }
 ]
   
-const apiKey = 'AIzaSyB3RSD0ORwAX2d3IZeush8JtPnFvd4UMDo';
+const apiKey = 'AIzaSyDO56xnP2e1JTtKAL68PoRUUOn9ZFpY0l0';
 const sessionTokken= (Math.random()*10);
 const authOptions = {
     headers: {
@@ -329,23 +331,58 @@ class App extends Component {
   searchButtonClickHandler = () => {
     console.log("clicked");
     //when clicked we need to send request to query complete api google
-    let url = `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${this.state.searchValue}&key=${apiKey}&sessiontoken=${sessionTokken}`;
-      console.log(url);
+    let url = `https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${this.state.searchValue}&key=${apiKey}&sessiontoken=${sessionTokken}`;
+      
      
-      axios.post(url)
+    this.setState({
+        isLoading: true,
+        showAutoComplete: false
+    })
+
+
+
+      axios(url,{
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          "Access-Control-Allow-Origin": "http://localhost:3000"
+        }
+      })
       .then(res => {
-          console.log("RESPONSE",res);
-             
+          console.log("RESPONSE",res.data.predictions.length," ",res.data);
+          if(res.data && res.data.predictions.length>0){
+              console.log("LOGGING RES DATAT");
+            this.setState({
+                autocomplete: res.data.predictions,
+                displayCards: true,
+                showAutoComplete: false,
+                searchValue: "",
+                isLoading:false
+              })
+          } else{
+              console.log("LOGGING HARDCODED")
+            this.setState({
+                autocomplete: hardCodedData,
+                displayCards: true,
+                showAutoComplete: false,
+                searchValue: "",
+                isLoading:false
+              })
+          }
       })
-      .catch(err => console.log("EROR"));
+      .catch(err => {
+            console.log("EROR",err)
+            this.setState({
+                autocomplete: hardCodedData,
+                displayCards: true,
+                showAutoComplete: false,
+                searchValue: "",
+                isLoading:false
+              })
+        });
 
 
-      this.setState({
-        autocomplete: hardCodedData,
-        displayCards: true,
-        showAutoComplete: false,
-        searchValue: ""
-      })
+     
 
     }
 
@@ -356,14 +393,10 @@ class App extends Component {
             isLoading : true
         })
 
-        console.log(this.state);
-
         const url = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=77531ae36740ffab832db5c0c158f4d0`
-
-        console.log("WEATHER URL ", url)
         axios.post(url)
-      .then(res => {
-          console.log(" RRR>>> ",res);
+        .then(res => {
+          console.log(" Response from server ",res);
           if(res.data){
             this.setState({
                 result: res.data,
@@ -411,7 +444,14 @@ class App extends Component {
         )
     }
 
-    if(this.state.displayModel){
+    if(this.state.isLoading){
+        modal = (
+            <Loader />
+        )
+    }
+
+
+    if(this.state.displayModel && !this.state.isLoading){
         modal = (
             <Modal
                 data = {this.state.result}
