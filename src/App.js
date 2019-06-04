@@ -339,7 +339,7 @@ class App extends Component {
         autocomplete: hardCodedData,
         displayCards: true,
         showAutoComplete: false,
-        searchValue: ""
+        //searchValue: ""
       })
 
     }
